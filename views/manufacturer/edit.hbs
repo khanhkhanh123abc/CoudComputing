@@ -1,0 +1,8 @@
+<form action="/manufacturer/edit/{{ manufacturer._id }}" method="post">
+   <h1>Edit manufacturer</h1>
+   Brand name: <input type="text" name="name" id="" value="{{ manufacturer.name }}" required>
+   <br><br>
+   Brand country: <input type="text" name="country" id="" value="{{ manufacturer.country }}" required>
+   <br><br>
+   <input type="submit" value="Edit">
+</form>

@@ -1,0 +1,28 @@
+<a class="btn btn-info" href="/manufacturer/add">Add new brand</a>
+<a class="btn btn-danger" href="/manufacturer/deleteall">Delete all</a>
+<br><br>
+<table class="table table-secondary">
+   <tr>
+      <th>Brand name</th>
+      <th>Brand country</th>
+      <th colspan="2">Menu</th>
+   </tr>
+   {{#each manufacturers }}
+   <tr>
+      <td>
+         <a href="/manufacturer/detail/{{ _id }}">
+            {{ name }}
+         </a>
+      </td>
+      <td>{{ country }}</td>
+      <td>
+         <a class="btn btn-warning" href="/manufacturer/edit/{{ _id }}">Edit</a>
+      </td>
+      <td>
+         <a class="btn btn-danger" href="/manufacturer/delete/{{ _id }}"
+         onclick="return confirm('Are you sure to delete this brand ?');"
+         >Delete</a>
+      </td>
+   </tr>
+   {{/each}}
+</table> 
