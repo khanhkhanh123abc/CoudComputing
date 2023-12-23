@@ -4,8 +4,8 @@ var ManufacturerModel = require('../models/ManufacturerModel');
 var ToyModel = require('../models/ToyModel');
 
 router.get('/', async (req, res) => {
-   var brands = await ManufacturerModel.find({});
-   res.render('manufacturer/index', { brands });
+   var manufacturers = await ManufacturerModel.find({});
+   res.render('manufacturer/index', { manufacturers });
 })
 
 router.get('/add', (req, res) => {
@@ -20,23 +20,14 @@ router.post('/add', async (req, res) => {
 
 router.get('/detail/:id', async (req, res) => {
    var id = req.params.id;
-   //SQL: SELECT * FROM mobiles WHERE manufacturer = "id"
-   var mobiles = await ToyModel.find({ manufacturer : id }).populate('manufacturer');
-   res.render('manufacturer/detail', { mobiles })
+   //SQL: SELECT * FROM toys WHERE manufacturer = "id"
+   var toys = await ToyModel.find({ manufacturer : id }).populate('manufacturer');
+   res.render('manufacturer/detail', { toys })
 })
 
 router.get('/delete/:id', async (req, res) => {
    var id = req.params.id;
-   //cách 1
-   try {
-      //SQL: DELETE FROM brands WHERE manufacturer = id
-      await ManufacturerModel.findByIdAndDelete(id);
-      console.log('Delete manufacturer succeed !');
-   } catch (err) {
-      console.log('Delete manufacturer fail. Error: ' + err);
-   };
-
-   //cách 2
+   
    var manufacturer = await ManufacturerModel.findById(id);
    await ManufacturerModel.deleteOne(manufacturer);
 
@@ -44,8 +35,8 @@ router.get('/delete/:id', async (req, res) => {
 })
 
 router.get('/deleteall', async (req, res) => {
-   //SQL: DELETE FROM brands
-   //     TRUNCATE TABLE brands
+   //SQL: DELETE FROM manufacturers
+   //     TRUNCATE TABLE manufacturers
    await ManufacturerModel.deleteMany();
    console.log('Delete all manufacturer succeed !');
    res.redirect('/manufacturer');
@@ -61,7 +52,7 @@ router.post('/edit/:id', async (req, res) => {
    var id = req.params.id;
    var manufacturer = req.body;
    try {
-      //SQL: UPDATE brands SET A = B WHERE id = 'id'
+      //SQL: UPDATE manufacturers SET A = B WHERE id = 'id'
       await ManufacturerModel.findByIdAndUpdate(id, manufacturer);
       console.log('update succeed !');
    } catch (err) {

@@ -17,7 +17,7 @@ hbs.registerHelper('equal', require('handlebars-helper-equal'))
 
 // 2. config 'mongoose' module
 var mongoose = require('mongoose');
-var uri = "mongodb+srv://longndt:rKqPKzCxONqJTlQC@cloud-db.73hpsfj.mongodb.net/gch1106";
+var uri = "mongodb+srv://admin:admin@clouda2.ydwgfal.mongodb.net/Toy";
 mongoose.set('strictQuery', true); //ignore mongoose warning
 mongoose.connect(uri)
   .then(() => console.log('ok'))
@@ -60,6 +60,6 @@ app.use(function(err, req, res, next) {
 });
 
 //4. config port (for cloud deployment)
-app.listen(process.env.PORT || 3001);
+app.listen(process.env.PORT || 3007);
 
 module.exports = app;

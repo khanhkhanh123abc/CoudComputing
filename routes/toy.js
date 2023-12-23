@@ -17,8 +17,8 @@ router.get('/customer', async (req, res) => {
 })
 
 router.get('/add', async (req, res) => {
-   var brands = await ManufacturerModel.find({});
-   res.render('toy/add', { brands });
+   var manufacturers = await ManufacturerModel.find({});
+   res.render('toy/add', { manufacturers });
 })
 
 router.post('/add', async (req, res) => {
@@ -36,8 +36,8 @@ router.get('/delete/:id', async (req, res) => {
 router.get('/edit/:id', async (req, res) => {
    var id = req.params.id;
    var toy = await ToyModel.findById(id);
-   var brands = await ManufacturerModel.find({});
-   res.render('toy/edit', { toy, brands });
+   var manufacturers = await ManufacturerModel.find({});
+   res.render('toy/edit', { toy, manufacturers });
 })
 
 router.post('/edit/:id', async (req, res) => {
@@ -53,22 +53,22 @@ router.post('/edit/:id', async (req, res) => {
 })
 
 router.get('/sort/asc', async (req, res) => {
-   //SQL: SELECT * FROM toys ORDER BY model
+   //SQL: SELECT * FROM Toys ORDER BY model
    var toys = await ToyModel.find().populate('manufacturer').sort({ model: 1 });
    res.render('toy/index', { toys })
 })
 
 router.get('/sort/desc', async (req, res) => {
-   //SQL: SELECT * FROM toys ORDER BY model DESC
-   var toys = await ToyModel.find().populate('manufacturer').sort({ model: -1 });
-   res.render('toy/index', { toys })
+   //SQL: SELECT * FROM Toys ORDER BY model DESC
+   var Toys = await ToyModel.find().populate('manufacturer').sort({ model: -1 });
+   res.render('toy/index', { Toys })
 })
 
 router.post('/search', async (req, res) => {
    var keyword = req.body.keyword;
-   //SQL: SELECT * FROM toys WHERE model LIKE '%keyword%'
-   var toys = await ToyModel.find({ model: new RegExp(keyword, "i") }).populate('manufacturer');
-   res.render('toy/index', { toys })
+   //SQL: SELECT * FROM Toys WHERE model LIKE '%keyword%'
+   var Toys = await ToyModel.find({ model: new RegExp(keyword, "i") }).populate('manufacturer');
+   res.render('toy/index', { Toys })
 })
 
 module.exports = router;
