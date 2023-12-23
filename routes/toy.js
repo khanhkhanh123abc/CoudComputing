@@ -7,7 +7,7 @@ var ManufacturerModel = require('../models/ManufacturerModel');
 router.get('/', async (req, res) => {
    var toys = await ToyModel.find({}).populate('manufacturer');
    //Path: views/toy/index.hbs
-   res.render('toy/index', { toys });
+   res.render('toy/index', {layout:'layout', toys });
 })
 
 router.get('/customer', async (req, res) => {
